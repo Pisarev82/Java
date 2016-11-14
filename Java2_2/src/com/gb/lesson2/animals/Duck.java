@@ -1,5 +1,7 @@
 package com.gb.lesson2.animals;
 
+import com.gb.lesson2.Exception.AnimalOutFromDistanceException;
+
 /**
  * Created by Tim on 12.07.2016.
  */
@@ -17,7 +19,7 @@ public class Duck extends Animal implements Jumpable, Swimable {
     }
 
     @Override
-    public void jump(int height) {
+    public void jump (int height) throws AnimalOutFromDistanceException {
         if(height < Duck.MAX_JUMP_HEIGHT) {
             System.out.println(getName() + " продолжает путь!");
         } else {
@@ -26,7 +28,7 @@ public class Duck extends Animal implements Jumpable, Swimable {
     }
 
     @Override
-    public void swim(int dist) {
+    public void swim(int dist) throws AnimalOutFromDistanceException {
         if(dist < Duck.MAX_SWIM_DIST) {
             System.out.println(getName() + " продолжает путь!");
         } else {

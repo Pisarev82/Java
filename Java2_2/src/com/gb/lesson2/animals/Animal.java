@@ -1,5 +1,7 @@
 package com.gb.lesson2.animals;
 
+import com.gb.lesson2.Exception.AnimalOutFromDistanceException;
+
 /**
  * Created by Tim on 12.07.2016.
  */
@@ -14,7 +16,7 @@ public abstract class Animal {
         this.maxDistance = maxDistance;
     }
 
-    public void cross(int value) {
+    public void cross(int value) throws AnimalOutFromDistanceException {
         if (value <= maxDistance) {
             System.out.println(name + " продолжает путь!");
         } else {
@@ -22,13 +24,17 @@ public abstract class Animal {
         }
     }
 
-    public boolean isOnDistance() {
+    public boolean isOnDistance()  {
         return this.onDistance;
     }
 
-    public void crossFail() {
-        System.out.println(this.toString() + " сошел с дистанции :(");
-        setOnDistance(false);
+    public void crossFail() throws AnimalOutFromDistanceException {
+
+        throw new AnimalOutFromDistanceException();
+
+//        System.out.println(this.toString() + " сошел с дистанции :(");
+//        setOnDistance(false);
+
     }
 
     private void setOnDistance(boolean onDistance) {

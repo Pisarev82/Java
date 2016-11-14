@@ -1,5 +1,8 @@
 package com.gb.lesson2.obstacles;
 
+import com.gb.lesson2.Exception.AnimalOutFromDistanceException;
+import com.gb.lesson2.Exception.FailException;
+import com.gb.lesson2.Exception.WallFailException;
 import com.gb.lesson2.animals.Animal;
 import com.gb.lesson2.animals.Jumpable;
 
@@ -13,12 +16,20 @@ public class Wall extends Obstacle {
     }
 
     @Override
-    public void doIt(Animal animal) {
+    public void doIt (Animal animal) throws FailException {
         if (animal instanceof Jumpable) {
             Jumpable jumpableAnimal = (Jumpable) animal;
-            jumpableAnimal.jump(getValue());
+            try {
+                jumpableAnimal.jump(getValue());
+            } catch (AnimalOutFromDistanceException e) {
+                throw new WallFailException (getValue(),  animal.toString());
+            }
         } else {
-            animal.crossFail();
+            try {
+                animal.crossFail();
+            } catch (AnimalOutFromDistanceException e){
+                throw new WallFailException (getValue(),  animal.toString());
+            }
         }
     }
 

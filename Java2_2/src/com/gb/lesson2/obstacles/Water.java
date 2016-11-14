@@ -1,5 +1,8 @@
 package com.gb.lesson2.obstacles;
 
+import com.gb.lesson2.Exception.AnimalOutFromDistanceException;
+import com.gb.lesson2.Exception.FailException;
+import com.gb.lesson2.Exception.WaterFailException;
 import com.gb.lesson2.animals.Animal;
 import com.gb.lesson2.animals.Swimable;
 
@@ -13,12 +16,20 @@ public class Water extends Obstacle {
     }
 
     @Override
-    public void doIt(Animal animal) {
+    public void doIt(Animal animal) throws FailException {
         if (animal instanceof Swimable) {
             Swimable swimableAnimal = (Swimable) animal;
-            swimableAnimal.swim(getValue());
+            try {
+                swimableAnimal.swim(getValue());
+            } catch (AnimalOutFromDistanceException e) {
+                throw new WaterFailException(getValue(),  animal.toString());
+            }
         } else {
-            animal.crossFail();
+            try {
+                animal.crossFail();
+            } catch (AnimalOutFromDistanceException e){
+                throw new WaterFailException(getValue(),  animal.toString());
+            }
         }
     }
 

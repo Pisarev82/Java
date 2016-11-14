@@ -1,5 +1,7 @@
 package com.gb.lesson2;
 
+import com.gb.lesson2.Exception.AnimalOutFromDistanceException;
+import com.gb.lesson2.Exception.FailException;
 import com.gb.lesson2.animals.Animal;
 import com.gb.lesson2.animals.Cat;
 import com.gb.lesson2.animals.Duck;
@@ -36,7 +38,12 @@ public class App {
             for (int j = 0; j < animals.length; j++) {
                 Animal animal = animals[j];
                 if (animal.isOnDistance()) {
-                    obstacle.doIt(animal);
+                    try {
+                        obstacle.doIt(animal);
+                    } catch (FailException | AnimalOutFromDistanceException e) {
+                        e.printStackTrace();
+                        e.getFailInfo();
+                    }
                 }
             }
         }
