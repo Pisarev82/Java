@@ -7,6 +7,7 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-	TheChatWindow window = new TheChatWindow();
+        TheChatWindow window = new TheChatWindow();
+
     }
 }
